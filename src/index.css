@@ -1,0 +1,15 @@
+/* Hide unwanted browser elements in print */
+@media print {
+  .print-button {
+    display: none !important;
+  }
+
+  @page {
+    margin: 0;
+  }
+
+  @page {
+    size: auto;
+    margin: 0;
+  }
+}
