@@ -6,16 +6,13 @@ import Spinner from './Spinner';
 
 import imageCompression from 'browser-image-compression';
 const Profile = () => {
-  const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState('');
   const baseURL = import.meta.env.VITE_APP_URL;
   const ImgUrl = import.meta.env.VITE_IMAGE_APP_URL;
   const [isLoading, setIsLoading] = useState(false);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
-  const [loading, setLoading] = useState(true);
   const [id, setId] = useState(null);
   const [viewImage, setViewImage] = useState(null);
   const access_token = localStorage.getItem('access_token');
