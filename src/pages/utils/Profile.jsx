@@ -26,7 +26,7 @@ const Profile = () => {
         },
       });
       const json = await response.json();
-      console.log('Profile response', json);
+
       setContact(json.data.phoneNumber);
       setEmail(json.data.email);
       setName(json.data.name);
@@ -34,13 +34,6 @@ const Profile = () => {
       if (json.data.profilePicture) {
         setImage(json.data.profilePicture);
       }
-
-      // const details = {
-      //   name: json.data.name,
-      //   email: json.data.email,
-      //   phoneNumber: json.data.phoneNumber,
-      // };
-      // return details;
     } catch (error) {
       console.log(error);
     }
@@ -73,35 +66,38 @@ const Profile = () => {
     formData.append('phoneNumber', contact);
 
     if (image) {
-      const options = {
-        maxSizeMB: 1, // Max size in MB
-        maxWidthOrHeight: 800, // Max width or height in pixels
-        useWebWorker: true, // Use web worker for background compression
-      };
-      const compressedFile = await imageCompression(image, options);
-      formData.append('profilePicture', compressedFile);
+      if (image instanceof Blob || image instanceof File) {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 800,
+          useWebWorker: true,
+        };
+        const compressedFile = await imageCompression(image, options);
+        formData.append('profilePicture', compressedFile);
+      } else {
+        formData.append('profilePicture', image);
+      }
     }
-    console.log(formData);
+
     try {
       const response = await fetch(`${baseURL}/admin/${id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
-        body: formData, // Send the FormData object directly in the body
+        body: formData,
       });
 
       const result = await response.json();
-      console.log('Response:', result);
-      toast.success('SuccessFully updated user details');
+      console.log('result from server', result);
+
+      toast.success(result.message);
       setIsLoading(false);
     } catch (error) {
       toast.error(`Couldn't update user details`);
-      console.error('Error:', error);
     }
   };
   const profilePic = `${ImgUrl}/${image}`;
-  console.log('profile pic', profilePic);
 
   return (
     <div className='bg-white flex flex-col p-8 max-w-lg mx-auto rounded-xl shadow-lg min-h-full justify-around'>
@@ -134,21 +130,6 @@ const Profile = () => {
           />
         </div>
       )}
-      {/* <div className='flex my-3  justify-center w-full'>
-        <input
-          id='fileInput'
-          type='file'
-          onChange={handleImageChange}
-          className='hidden'
-        />
-        <label
-          htmlFor='fileInput'
-          className='rounded-sm flex justify-center border border-black  px-2 py-1 hover:cursor-pointer'
-        >
-          {/* <MdOutlineFileUpload size='20px' /> */}
-      {/* Upload a file */}
-      {/* </label>
-      </div>} */}
 
       <div className='space-y-6'>
         <div className='flex flex-col'>
@@ -189,8 +170,6 @@ const Profile = () => {
           )}
         </button>
       </div>
-
-      {/* {modalOpen && <TwoFactorModal onClose={() => setModalOpen(false)} />} */}
     </div>
   );
 };
