@@ -18,12 +18,12 @@ const ForgotPassword = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.emailOrPhone);
+
     try {
       const forgotPasswordBody = {
         email: formData.emailOrPhone,
       };
-      console.log('forgotpasswordbody', forgotPasswordBody);
+
       const response = await fetch(`${baseURL}/admin/forgotPassword`, {
         method: 'POST',
         headers: {
@@ -34,13 +34,12 @@ const ForgotPassword = () => {
       // if (!response.ok) {
       //   throw new Error(`Response status: ${response.status}`);
       // }
-      console.log(response);
+
       const json = await response.json();
       if (response.status === 500) {
         toast.error(`${json.message}`);
       }
 
-      console.log(json);
       if (json.message == 'Password reset token sent to your email') {
         navigate(`/otp-page-reset/${formData.emailOrPhone}`, {
           state: {

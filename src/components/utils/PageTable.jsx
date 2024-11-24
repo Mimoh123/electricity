@@ -20,8 +20,7 @@ const PageTable = ({
 }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  console.log('The table data is', TableData.customersWithInfo);
-  console.log('TableDATAA', TableData.customersWithInfo);
+
   const [tableData, setTableData] = useState([]);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const navigate = useNavigate();
@@ -54,18 +53,11 @@ const PageTable = ({
   const handleQrView = (name) => {
     navigate(`/customer-management/Qr-view/${name}`, { state: { name: name } });
   };
-  useEffect(() => {
-    console.log('This is the data to be exported', data);
-  }, [data]);
+  useEffect(() => {}, [data]);
   useEffect(() => {
     setTableData(TableData.customersWithMeterInfo);
   }, [TableData]);
-  useEffect(() => {
-    console.log('selected data to delete', selectedItemId);
-  }, [selectedItemId]);
-  useEffect(() => {
-    console.log('customer to be deleted', selectedItemId);
-  }, [selectedItemId]);
+
   const handleThreeDots = (index) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };

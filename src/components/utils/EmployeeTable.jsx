@@ -22,13 +22,12 @@ const EmployeeTable = ({ TableData, headers, getSelectedEmail, handleDiv }) => {
       setData(formattedData);
     }
   }, [TableData]);
-  console.log('tabledata', TableData);
+
   const navigate = useNavigate();
   const handleViewDetails = (id) => {
     navigate(`/employee-management/view-employee-details/${id}`, {
       state: { id: id },
     });
-    console.log('This is the view details id', id);
   };
   const handleThreeDots = (index) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -80,7 +79,6 @@ const EmployeeTable = ({ TableData, headers, getSelectedEmail, handleDiv }) => {
                         className='w-full '
                         onClick={() => {
                           handleViewDetails(data.id);
-                          console.log('View details', data._id);
                         }}
                       >
                         <li className='px-4 font-normal py-2 hover:bg-gray-200 cursor-pointer'>
@@ -90,7 +88,6 @@ const EmployeeTable = ({ TableData, headers, getSelectedEmail, handleDiv }) => {
                       <button
                         className='px-4 w-full py-2 font-normal hover:bg-gray-200 cursor-pointer '
                         onClick={() => {
-                          console.log(data.email);
                           // setIsDialogOpen(true);
                           // setSelectedItemEmail(data.email);
                           getSelectedEmail(data.email);
@@ -111,7 +108,6 @@ const EmployeeTable = ({ TableData, headers, getSelectedEmail, handleDiv }) => {
         className='flex fixed bottom-10 right-14 self-end border hover:opacity-70 bg-green-700 text-white px-5 py-3 items-center gap-1 rounded-lg'
         onClick={() => {
           exportToExcel(data, 'Employee');
-          console.log('Clicked');
         }}
       >
         <Icons.GoDownload />

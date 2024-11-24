@@ -16,7 +16,7 @@ const FilteredCustomer = ({
   handleQrDiv,
 }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
-  console.log('tabledata', data);
+
   const navigate = useNavigate();
   const handleViewDetails = (id) => {
     navigate(`/customer-management/details/${id}`, { state: { id: id } });
@@ -89,7 +89,7 @@ const FilteredCustomer = ({
                     const response = await axiosInstance.delete(
                       `/customer/${selectedItemId}`
                     );
-                    console.log(response);
+
                     toast.success('Deleted Successfully', {
                       description: ' Customer deleted Succesfully',
                     });

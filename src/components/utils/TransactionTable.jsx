@@ -28,7 +28,7 @@ const TransactionTable = ({ TableData, headers }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  console.log('TableDATAA', TableData);
+
   const [tableData, setTableData] = useState([]);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const navigate = useNavigate();
@@ -61,9 +61,6 @@ const TransactionTable = ({ TableData, headers }) => {
     // const normalizedData = normalizeKeys(TableData);
     setTableData(TableData.customersWithMeterInfo);
   }, [TableData]);
-  useEffect(() => {
-    console.log('selected data to delete', selectedItemId);
-  }, [selectedItemId]);
 
   const handleThreeDots = (index) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -215,7 +212,6 @@ const TransactionTable = ({ TableData, headers }) => {
       <button
         onClick={() => {
           exportToExcel(data, 'transactionHistory');
-          console.log('data to be exported', data);
         }}
         className='flex fixed bottom-10 right-20 bg-green-700 hover:opacity-70 text-white  px-5 py-3 items-center gap-1 rounded-lg'
       >

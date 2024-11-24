@@ -1,30 +1,3 @@
-// import * as XLSX from 'xlsx';
-// export const exportToExcel = (data, filename) => {
-//   console.log('Data from Download:', data);
-//   const worksheet = XLSX.utils.json_to_sheet(data);
-//   const workbook = XLSX.utils.book_new();
-//   XLSX.utils.book_append_sheet(workbook, worksheet, 'Electricity');
-//   XLSX.writeFile(workbook, `${filename}.xlsx`);
-// };
-
-// export default function DownloadButton({ data, fileName }) {
-//   const handleClick = () => {
-//     exportToExcel(data, fileName);
-//   };
-
-//   return (
-//     <button
-//       onClick={() => {
-//         handleClick();
-//       }}
-//       className='flex self-end border border-black p-2 items-center gap-1 rounded-lg'
-//     >
-//       {/* <Icons.GoDownload /> */}
-//       <h1 className='text-sm'>Download Sheet</h1>
-//     </button>
-//   );
-// }
-
 import * as XLSX from 'xlsx';
 
 const exportToCSV = (data, fileName) => {

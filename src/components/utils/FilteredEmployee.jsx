@@ -13,7 +13,6 @@ const FilteredEmployee = ({ data, headers, getSelectedEmail, handleDiv }) => {
     navigate(`/employee-management/view-employee-details/${id}`, {
       state: { id: id },
     });
-    console.log('This is the view details id', id);
   };
 
   const handleThreeDots = (index) => {
@@ -23,77 +22,9 @@ const FilteredEmployee = ({ data, headers, getSelectedEmail, handleDiv }) => {
   const [selectedItemEmail, setSelectedItemEmail] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  console.log('this is the data passed in filtered employee', data);
 
   return (
     <div className='flex flex-col items-center flex-1 gap-4'>
-      {/* {isAlertOpen && (
-        <div className='shadow-2xl rounded-lg bg-white px-5 py-10 z-20 w-96 flex flex-col items-center absolute top-[20%]'>
-          <ImCross
-            className='cursor-pointer absolute right-5 top-5 text-sm font-medium'
-            onClick={() => {
-              setIsAlertOpen(false);
-            }}
-          />
-          <h1 className='mt-10 font-semibold text-sm mb-5'>
-            Your new password has been sent to your email
-          </h1>
-          <h1 className='font-bold text-xl'>{selectedItemEmail}</h1>
-          <section className='flex w-full justify-center mt-5'>
-          
-          </section>
-        </div>
-      )} */}
-
-      {/* {isDialogOpen && (
-        <div className='shadow-2xl rounded-lg bg-white px-5 py-10 z-20 w-96 flex flex-col items-center absolute top-[20%]'>
-          <ImCross
-            className='cursor-pointer absolute right-5 top-5 text-sm font-medium'
-            onClick={() => {
-              setIsDialogOpen(false);
-            }}
-          />
-          <h1 className='font-bold text-xl'>Are you sure?</h1>
-          <h1 className='mt-10 font-semibold text-sm mb-5'>
-            You want to reset password?
-          </h1>
-          <section className='flex w-full justify-between mt-5'>
-            <Button
-              className='w-1/2 mr-2 bg-white text-black hover:bg-white hover:brightness-150'
-              onClick={() => {
-                setIsDialogOpen(false);
-                setSelectedItemEmail('');
-              }}
-            >
-              No
-            </Button>
-            <Button
-              className='w-1/2 bg-blue-500 hover:bg-blue-500 hover:brightness-125'
-              onClick={async () => {
-                try {
-                  const response = await axiosInstance.post(`/employee/reset`, {
-                    emailOrPhone: selectedItemEmail,
-                  });
-                  console.log(response);
-                  toast.success('Successfully reset Password', {
-                    description: 'Password reset successfully',
-                  });
-                  setIsDialogOpen(false);
-                  setIsAlertOpen(true);
-                } catch (error) {
-                  console.log(error);
-                  toast.error('Failed to Reset password ', {
-                    description: 'Failed to Reset Password',
-                  });
-                }
-              }}
-            >
-              Yes
-            </Button>
-          </section>
-        </div>
-      )} */}
-
       <table className='w-full h-full overflow-y-auto'>
         <thead>
           <tr>
@@ -133,7 +64,6 @@ const FilteredEmployee = ({ data, headers, getSelectedEmail, handleDiv }) => {
                       className='w-full'
                       onClick={() => {
                         handleViewDetails(data[0].id);
-                        console.log('View details', data.id);
                       }}
                     >
                       <li className='px-4 font-normal py-2 hover:bg-gray-200 cursor-pointer'>
@@ -143,7 +73,6 @@ const FilteredEmployee = ({ data, headers, getSelectedEmail, handleDiv }) => {
                     <button
                       className='px-4 w-full py-2 font-normal hover:bg-gray-200 cursor-pointer'
                       onClick={() => {
-                        console.log(data[0].email);
                         handleDiv(true);
                         getSelectedEmail(data[0].email);
                       }}
