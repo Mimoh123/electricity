@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import Spinner from './Spinner';
-import { MdOutlineFileUpload } from 'react-icons/md';
-import { FileInput } from 'lucide-react';
+
+import imageCompression from 'browser-image-compression';
 const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState('');
@@ -76,7 +76,13 @@ const Profile = () => {
     formData.append('phoneNumber', contact);
 
     if (image) {
-      formData.append('profilePicture', image);
+      const options = {
+        maxSizeMB: 1, // Max size in MB
+        maxWidthOrHeight: 800, // Max width or height in pixels
+        useWebWorker: true, // Use web worker for background compression
+      };
+      const compressedFile = await imageCompression(image, options);
+      formData.append('profilePicture', compressedFile);
     }
     console.log(formData);
     try {
