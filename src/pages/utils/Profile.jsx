@@ -4,6 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import Spinner from './Spinner';
 import { MdOutlineFileUpload } from 'react-icons/md';
+import { FileInput } from 'lucide-react';
 const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState('');
@@ -104,30 +105,47 @@ const Profile = () => {
       <h1 className='text-2xl font-semibold text-center'>Profile</h1>
       {/*  */}
       {image ? (
-        <img
-          src={viewImage ? viewImage : profilePic}
-          className='w-24 h-24 self-center rounded-full'
-        />
+        <div className='overflow-hidden flex justify-center items-center'>
+          <img
+            src={viewImage ? viewImage : profilePic}
+            className='w-24 h-24 hover:cursor-pointer hover:brightness-50 self-center rounded-full'
+            onClick={() => {
+              document.getElementById('fileInput').click();
+            }}
+          />
+          <input
+            id='fileInput'
+            type='file'
+            onChange={handleImageChange}
+            className='hidden'
+          />
+        </div>
       ) : (
         <div className='w-full flex items-center justify-center space-x-4'>
           <Skeleton className='h-16 w-16 rounded-full' />
+          <input
+            id='fileInput'
+            type='file'
+            onChange={handleImageChange}
+            className='hidden'
+          />
         </div>
       )}
-      <div className='flex my-3  justify-center w-full'>
+      {/* <div className='flex my-3  justify-center w-full'>
         <input
           id='fileInput'
           type='file'
           onChange={handleImageChange}
           className='hidden'
-        />{' '}
+        />
         <label
           htmlFor='fileInput'
-          className='rounded-sm flex justify-center border border-black  px-3 py-1 hover:cursor-pointer'
+          className='rounded-sm flex justify-center border border-black  px-2 py-1 hover:cursor-pointer'
         >
           {/* <MdOutlineFileUpload size='20px' /> */}
-          Upload a file
-        </label>
-      </div>
+      {/* Upload a file */}
+      {/* </label>
+      </div>} */}
 
       <div className='space-y-6'>
         <div className='flex flex-col'>
