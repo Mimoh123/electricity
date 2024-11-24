@@ -9,11 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { exportToExcel } from '@/Excel/ExportToExcel';
 
 const BillingTable = ({ billingData }) => {
-  // console.log('billing data', billingData);
   const navigate = useNavigate();
   const headers = ['Service', 'Rate', 'Fine', 'Min. Charge', 'Action'];
   const [tableData, setTableData] = useState([]);
-  // const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [data, setData] = useState([]);
@@ -27,9 +26,7 @@ const BillingTable = ({ billingData }) => {
     }));
     setData(exportingData);
   }, [billingData]);
-  // const handleThreeDots = (index) => {
-  //   setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
-  // };
+
   const handleEditDetails = (id) => {
     navigate(`/billing-rate-settings/edit-meter-rate/${id}`, {
       state: { id: id },
@@ -69,7 +66,7 @@ const BillingTable = ({ billingData }) => {
                     const response = await axiosInstance.delete(
                       `/meter-Rate/${selectedItemId}`
                     );
-                    console.log(response);
+
                     toast.success('Deleted Successfully', {
                       description: ' Customer deleted Succesfully',
                     });
@@ -79,7 +76,6 @@ const BillingTable = ({ billingData }) => {
                       location.reload();
                     }, 1000);
                   } catch (error) {
-                    console.log(error);
                     toast.error('Failed to Deleted ', {
                       description: 'Failed to delete Meter Rate',
                     });
@@ -94,7 +90,7 @@ const BillingTable = ({ billingData }) => {
           </section>
         </div>
       )}
-      {/* {console.log('consolefrombillingtable', billingData)} */}
+
       <table className='w-full h-full overflow-y-auto'>
         <thead>
           <tr>
@@ -113,8 +109,6 @@ const BillingTable = ({ billingData }) => {
             <tr key={index}>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
                 {data.meterRates[0].meterType}/{data.meterRates[0].customerType}
-                {/* {console.log('test', data.meterRates[0].meterType)} */}
-                {/* {console.log('Data', data[0]?.meterType)} */}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
                 {data.meterRates[0]?.baseRate}
@@ -137,17 +131,6 @@ const BillingTable = ({ billingData }) => {
                     }}
                   />
                 </h1>
-
-                {/* <Icons.RiDeleteBin6Line
-                  onClick={() => {
-                    console.log('Item to be deleted id', data._id);
-                    setSelectedItemId(data._id);
-                    setIsDialogOpen(true);
-                  }}
-                  className='w-full text-center cursor-pointer'
-                  size='20px'
-                  color='red'
-                /> */}
               </td>
             </tr>
           ))}

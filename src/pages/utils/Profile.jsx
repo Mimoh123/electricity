@@ -35,7 +35,7 @@ const Profile = () => {
         setImage(json.data.profilePicture);
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Failed to get admin info');
     }
   };
   useEffect(() => {
@@ -89,7 +89,6 @@ const Profile = () => {
       });
 
       const result = await response.json();
-      console.log('result from server', result);
 
       toast.success(result.message);
       setIsLoading(false);
