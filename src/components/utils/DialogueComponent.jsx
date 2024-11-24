@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { axiosInstance } from '@/pages/auth/config';
@@ -27,7 +19,7 @@ function DialogueComponent({
     try {
       const response = await axiosInstance.delete(`/customer/${deleteId}`);
       handleDiv(false);
-      console.log(response);
+
       toast.success('Successfully deleted Customer', {
         description: 'Successfully deleted the selected customer',
       });
@@ -35,7 +27,7 @@ function DialogueComponent({
         window.location.reload();
       }, 1500);
     } catch (error) {
-      console.log(error);
+      toast(error.data.message);
     }
   };
   const resetPassword = async () => {
@@ -43,7 +35,6 @@ function DialogueComponent({
       const response = await axiosInstance.post(`/employee/reset`, {
         emailOrPhone: selectedItemEmail,
       });
-      console.log(response);
       if (
         response.data.data.message ===
         "Password reset successful and sent to employee's email."
@@ -53,10 +44,7 @@ function DialogueComponent({
         });
         handleSuccessDiv(true);
       }
-      // setIsDialogOpen(false);
-      // setisAlertOpen(true);
     } catch (error) {
-      console.log(error);
       toast.error('Failed to Reset password ', {
         description: 'Failed to Reset Password',
       });
