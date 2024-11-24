@@ -159,6 +159,7 @@ const OtpPageLogin = () => {
               <div className='flex'>
                 <h1>{`Didn't receive a code?`}</h1>
                 <button
+                  type='button'
                   className='ml-2 text-blue-700 font-semibold'
                   onClick={handleResend}
                 >

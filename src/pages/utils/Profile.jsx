@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import TwoFactorModal from '../../components/utils/TwoFactorModal';
-import ProfilePic from '../../assets/Profile.jpg';
-import { axiosInstance } from '../auth/config';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import Spinner from './Spinner';
-
+import { MdOutlineFileUpload } from 'react-icons/md';
 const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState('');
@@ -115,7 +113,21 @@ const Profile = () => {
           <Skeleton className='h-16 w-16 rounded-full' />
         </div>
       )}
-      <input type='file' onChange={handleImageChange} className='self-center' />
+      <div className='flex my-3  justify-center w-full'>
+        <input
+          id='fileInput'
+          type='file'
+          onChange={handleImageChange}
+          className='hidden'
+        />{' '}
+        <label
+          htmlFor='fileInput'
+          className='rounded-sm flex justify-center border border-black  px-3 py-1 hover:cursor-pointer'
+        >
+          {/* <MdOutlineFileUpload size='20px' /> */}
+          Upload a file
+        </label>
+      </div>
 
       <div className='space-y-6'>
         <div className='flex flex-col'>
