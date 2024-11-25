@@ -140,7 +140,7 @@ const BillingTable = ({ billingData }) => {
         onClick={() => {
           exportToExcel(data, 'billing and rate');
         }}
-        className='flex fixed bottom-10 right-24 bg-green-700 text-white hover:opacity-70  py-3 px-5 items-center gap-1 rounded-lg'
+        className='flex fixed bottom-10 right-[7.2rem] bg-green-700 text-white hover:opacity-70  py-3 px-5 items-center gap-1 rounded-lg'
       >
         <Icons.GoDownload />
         <h1 className='text-sm'>Download Sheet</h1>
