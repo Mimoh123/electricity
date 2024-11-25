@@ -27,6 +27,7 @@ function ViewDetailsTransaction() {
   const detailsMap = {
     // CName: bill.customer.name || '',
     'Transaction ID': bill._id || '',
+    Name: bill.customer ? bill.customer.name : '',
     Date: bill.billingDate || '',
     Amount: bill.totalAmount || '',
     'Payment Method': bill.paymentMethod,

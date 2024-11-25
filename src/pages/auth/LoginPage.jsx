@@ -19,36 +19,9 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  useEffect(() => {
-    console.log('state of divOPne', divOpen);
-  }, [divOpen]);
+
   const handleForgotPassword = () => {
     navigate('/forgot-password');
-    // try {
-    //   const forgotPasswordBody = {
-    //     email: formData.emailOrPhone,
-    //   };
-    //   console.log('forgotpasswordbody', forgotPasswordBody);
-    //   const response = await fetch(`${baseURL}/admin/forgotPassword`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(forgotPasswordBody),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error(`Response status: ${response.status}`);
-    //   }
-
-    //   const json = await response.json();
-    //   console.log(json);
-    //   if (json.success) {
-    //     setDivOpen(true);
-    //   }
-    // } catch (error) {
-    //   console.error('Error during registration:', error.message);
-    // }
   };
 
   const handleSubmit = async (e) => {
@@ -72,13 +45,10 @@ const LoginPage = () => {
           });
           return;
         }
-
-        // throw new Error(`Response status: ${response.status}`);
       }
 
-      // console.log(response.message);
       const json = await response.json();
-      // console.log(json);
+
       if (json.message == '2FA token sent to your email') {
         navigate('/otp-Login', {
           state: { email: formData.emailOrPhone, fromLogin: true },
@@ -89,13 +59,12 @@ const LoginPage = () => {
         localStorage.setItem('refresh_token', json.data.refreshToken);
         localStorage.setItem('isAuthenticated', true);
         localStorage.setItem('Admin-email', formData.emailOrPhone);
-        console.log('Login successful:', json);
+
         navigate('/');
       }
     } catch (error) {
       console.error('Error during registration:', error);
       if (error.message === ' Response status: 401') {
-        console.log('inside the component');
         toast.error('Invalid email or password');
       }
     }
