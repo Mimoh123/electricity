@@ -10,18 +10,10 @@ const OtpPageLogin = () => {
   const [loading, setLoading] = useState(true);
   const [countdown, setCountDown] = useState(20);
 
-  // const formData = location.state?.email || '';
   const formData = location.state?.email ? location.state.email : '';
 
-  console.log('Formdata email:', formData);
-  // const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState(['', '', '', '']);
 
-  // const handleChange = (e) => {
-  //   setOtp(e.target.value);
-  // };
-  const [otp, setOtp] = useState(['', '', '', '']); // 4 input fields
-
-  // Handle changes for each OTP field
   const handleChange = (e, index) => {
     const value = e.target.value;
 
@@ -30,34 +22,22 @@ const OtpPageLogin = () => {
       updatedOtp[index] = value;
       setOtp(updatedOtp);
       const otpValue = otp.join('');
-      console.log('written otp', otpValue);
-      // Auto-focus next input if the current input is filled
+
       if (value && index < 3) {
         document.getElementById(`otp-input-${index + 1}`).focus();
       }
     }
   };
 
-  // Handle focus on backspace (moving to the previous input field)
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
 
-  // Handle OTP submission
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const otpValue = otp.join('');
-  //   console.log('OTP Submitted:', otpValue);
-
-  //   // Perform your API request or validation here
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const otpValue = otp.join('');
-    console.log(otpValue);
 
     try {
       const response = await fetch(`${baseURL}/auth/2fa`, {
@@ -71,18 +51,15 @@ const OtpPageLogin = () => {
         }),
       });
 
-      console.log('response', response);
       const json = await response.json();
-      console.log('OTP page response:', json);
+
       if (json.message == '2FA verified successfully') {
         localStorage.setItem('access_token', json.data.accessToken);
         localStorage.setItem('refresh_token', json.data.refreshToken);
         localStorage.setItem('isAuthenticated', true);
         localStorage.setItem('Admin-email', formData);
-        console.log('Login successful:', json);
+
         navigate('/');
-        console.log('login success:', json);
-        console.log('accesstoken', json.data.accessToken);
       } else {
         toast.error('Invalid or expired token');
       }
@@ -123,7 +100,7 @@ const OtpPageLogin = () => {
     <div className='flex flex-1 h-screen bg-[#e6e6fa] flex-col items-center justify-center gap-4'>
       <div className='flex gap-8 flex-col bg-white p-8 rounded-lg shadow-3xl items-center justify-center'>
         <h1 className='font-semibold text-2xl'>Verify your Code to Login</h1>
-        {console.log(formData)}
+
         <form
           className='flex flex-col gap-8 items-center'
           onSubmit={handleSubmit}
@@ -174,9 +151,6 @@ const OtpPageLogin = () => {
           >
             Verify
           </button>
-          {/* <button className='text-blue-500' onClick={handleResend}>
-            Resend OTP
-          </button> */}
         </form>
       </div>
     </div>

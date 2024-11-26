@@ -64,62 +64,6 @@ const PageTable = ({
 
   return (
     <div className='flex relative flex-col items-center flex-1 gap-4'>
-      {/* {isDialogOpen && (
-        <div className=' shadow-2xl rounded-lg bg-white px-5 py-10 z-20 w-96 flex flex-col items-center absolute top-[20%]'>
-          <ImCross
-            className='cursor-pointer absolute right-5 top-5 text-sm font-medium'
-            onClick={() => {
-              setIsDialogOpen(false);
-            }}
-          />
-
-          <h1 className='font-bold text-xl'>Are you sure?</h1>
-          <h1 className=' mt-10 font-semibold text-sm mb-5'>
-            You want to delete?
-          </h1>
-          <section className='flex w-full justify-between mt-5'>
-            <Button
-              className='w-1/2  mr-2 bg-white text-black hover:bg-white hover:brightness-150'
-              onClick={() => {
-                setIsDialogOpen(false);
-                setSelectedItemId(null);
-              }}
-            >
-              No
-            </Button>
-            <Button
-              className='w-1/2 bg-blue-500 hover:bg-blue-500 hover:brightness-125'
-              onClick={() => {
-                const deleteData = async () => {
-                  try {
-                    const response = await axiosInstance.delete(
-                      `/customer/${selectedItemId}`
-                    );
-                    console.log(response);
-                    toast.success('Deleted Successfully', {
-                      description: ' Customer deleted Succesfully',
-                    });
-                    setSelectedItemId(null);
-                    setIsDialogOpen(false);
-                    // setTimeout(() => {
-                    //   location.reload();
-                    // }, 2000);
-                  } catch (error) {
-                    console.log(error);
-                    toast.error('Failed to Deleted ', {
-                      description: 'Failed to delete Customer',
-                    });
-                  }
-                };
-                deleteData();
-                // location.reload();
-              }}
-            >
-              Yes
-            </Button>
-          </section>
-        </div>
-      )} */}
       <table className='w-full h-full overflow-y-auto border-collapse'>
         <thead>
           <tr>
@@ -221,7 +165,6 @@ const PageTable = ({
       <button
         onClick={() => {
           exportToExcel(data, 'sjeet1');
-          console.log(data);
         }}
         className='flex fixed bottom-10 right-16 bg-green-700 py-3 px-5 text-white hover:opacity-70 items-center gap-1 rounded-lg'
       >

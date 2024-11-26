@@ -38,7 +38,6 @@ const LoginPage = () => {
       });
       setIsLoading(false);
       if (!response.ok) {
-        console.log(response.status);
         if (response.status === 401) {
           toast.error('Invalid email or password', {
             description: `Admin credentials didn't match`,
@@ -53,7 +52,6 @@ const LoginPage = () => {
         navigate('/otp-Login', {
           state: { email: formData.emailOrPhone, fromLogin: true },
         });
-        console.log('Response from Login:', json);
       } else {
         localStorage.setItem('access_token', json.data.accessToken);
         localStorage.setItem('refresh_token', json.data.refreshToken);

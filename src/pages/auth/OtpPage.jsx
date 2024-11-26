@@ -11,7 +11,6 @@ const OtpPage = () => {
   const [loading, setLoading] = useState(true);
   const formData = location.state?.email || '';
   const [otp, setOtp] = useState(['', '', '', '']);
-  console.log(formData);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -21,7 +20,7 @@ const OtpPage = () => {
       updatedOtp[index] = value;
       setOtp(updatedOtp);
       const otpValue = otp.join('');
-      console.log('written otp', otpValue);
+
       // Auto-focus next input if the current input is filled
       if (value && index < 3) {
         document.getElementById(`otp-input-${index + 1}`).focus();
@@ -50,15 +49,13 @@ const OtpPage = () => {
         }),
       });
       const json = await response.json();
-      console.log('json', json);
+
       if (json.success === true) {
         navigate('/login');
       } else {
         toast.error(json.message);
         throw new Error();
       }
-
-      console.log('Registration success:', json);
     } catch (error) {
       console.error('Error during registration:', error.message);
     }
@@ -82,7 +79,6 @@ const OtpPage = () => {
       }
 
       const json = await response.json();
-      console.log('Registration success:', json);
 
       toast.success('Code sent to your email');
     } catch (error) {
