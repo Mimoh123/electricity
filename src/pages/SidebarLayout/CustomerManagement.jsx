@@ -2,13 +2,21 @@
 import { Icons } from '../../components/data/Icons';
 import PageTable from '../../components/utils/PageTable';
 import { Headers } from '../../components/data/TableData';
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 import { axiosInstance } from '../auth/config';
 import { FaAngleDoubleLeft } from 'react-icons/fa';
 
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { IoIosArrowDown } from 'react-icons/io';
 
 import FilteredCustomer from '@/components/utils/FilteredCustomer';
 import DialogueComponent from '@/components/utils/DialogueComponent';
@@ -16,7 +24,8 @@ import { FaChevronRight } from 'react-icons/fa';
 import { FaChevronLeft } from 'react-icons/fa';
 import { toast } from 'sonner';
 import SkeletonTable from '@/components/utils/SkeletonTable';
-
+import { Skeleton } from '@/components/ui/skeleton';
+import { IoIosOptions } from 'react-icons/io';
 const CustomerManagement = () => {
   const [tableData, setTableData] = useState(null);
   const [page, setPage] = useState(1);
@@ -25,8 +34,10 @@ const CustomerManagement = () => {
   const [filteredData, setFilteredData] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [selectedSort, setSelectedSort] = useState('Most recent First');
 
   const [meterData, setMeterData] = useState(null);
+  const data = ['Most recent First', 'Oldest First'];
 
   const navigate = useNavigate();
   const [qrDiv, setQrDiv] = useState(false);
@@ -127,11 +138,11 @@ const CustomerManagement = () => {
       {qrDiv && (
         <DialogueComponent variant='qr' qr={qr} handleQrDiv={handleQrDiv} />
       )}
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center  justify-between'>
         <form className='w-3/4 ' onSubmit={handleSearch}>
           <div className='border flex items-center bg-white justify-between  px-4 py-1 rounded-lg'>
             <input
-              className='w-full p-2 outline-none'
+              className='w-full placeholder:font-normal p-2 outline-none'
               placeholder='Enter Phone Number'
               onChange={handleChange}
             />
@@ -140,6 +151,50 @@ const CustomerManagement = () => {
             </button>
           </div>
         </form>
+        {!tableData && !filteredData ? (
+          <Skeleton className='ml-[-60px] h-12 w-16' />
+        ) : (
+          <div
+            className='flex py-1  ml-[-60px] justify-start
+        '
+          >
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  className='border h-12  flex items-center justify-around '
+                  variant='outline'
+                >
+                  {/* <span className='font-medium'>{selectedSort}</span>
+                  <span className='flex items-center mt-[2px]'>
+                    <IoIosArrowDown />
+                  </span> */}
+                  <IoIosOptions
+                    size={'20px'}
+                    className='hover:cursor-pointer hover:opacity-75'
+                  />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className='w-44'>
+                <DropdownMenuGroup>
+                  {data.map((item) => {
+                    console.log('data', item);
+                    return (
+                      <DropdownMenuItem
+                        key={item}
+                        className='w-auto'
+                        onClick={(key) => {
+                          setSelectedSort(item);
+                        }}
+                      >
+                        {item}
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        )}
 
         <button
           className='flex bg-green-700 hover:opacity-80  items-center justify-center p-3 rounded-md'
@@ -158,6 +213,7 @@ const CustomerManagement = () => {
           handleDiv={handleDiv}
         />
       )}
+
       {!tableData && !filteredData && <SkeletonTable headers={Headers} />}
       {tableData && !filteredData && (
         <PageTable
@@ -232,7 +288,6 @@ const CustomerManagement = () => {
           </button>
         </section>
       </div>
-      {/* )} */}
     </div>
   );
 };
