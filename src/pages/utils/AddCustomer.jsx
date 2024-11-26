@@ -53,7 +53,7 @@ function AddCustomer() {
     const fetchMeterData = async () => {
       try {
         const response = await axiosInstance.get('/meter-Rate');
-        console.log('Response from server:', response);
+
         setAllMeterData(response.data.data.meterRates);
       } catch (error) {
         console.error('Error fetching meter data:', error);
@@ -63,22 +63,14 @@ function AddCustomer() {
 
     fetchMeterData();
   }, []);
-  useEffect(() => {
-    console.log('MEter data', selectedMeter);
-  }, [selectedMeter]);
-  useEffect(() => {
-    console.log('Meter data:', allmeterData);
-  }, [allmeterData]);
-  useEffect(() => {
-    console.log(selectedMeter);
-  });
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const selectedMeterDataFetched = await fetchMeterDataById(
       formData.meterType
     );
-    // console.log('form submitted', formData);
+
     const customerData = {
       name: formData.name,
       email: formData.email,
@@ -94,14 +86,13 @@ function AddCustomer() {
       lastReading: 0, // Example value
       lastReadingDate: new Date().toISOString(),
     };
-    console.log('posting body', { customerData, meterData });
 
     try {
       const response = await axiosInstance.post('/customer/create', {
         customerData,
         meterData,
       });
-      console.log('Response from server:', response);
+
       toast.success('Added Successfully', {
         description: 'New Customer Added',
       });

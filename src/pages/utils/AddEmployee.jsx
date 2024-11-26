@@ -26,15 +26,13 @@ function AddEmployee() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
     try {
       const response = await axiosInstance.post(
         `/employee/create?employee=true`,
         formData
       );
 
-      // console.log(response);
-      // console.log('Response:', response.data);
       if (response.data.success) {
         toast.success('Added Successfully', {
           description: 'New Employee Added',
@@ -150,43 +148,10 @@ function AddEmployee() {
                   className='bg-inherit text-gray-500 border border-gray-400 p-2 rounded-md flex-grow'
                 />
               </div>
-              {/* <div className='flex items-center mt-5'>
-                <label className='font-bold text-lg w-32'>Joined Date</label>
-                <span className='mx-20'>:</span>
-                <input
-                  type='text'
-                  name='joinedDate'
-                  value={formData.joinedDate}
-                  onChange={handleChange}
-                  className='bg-inherit text-gray-500 border border-gray-400 p-2 rounded-md flex-grow'
-                />
-              </div>
-              <div className='flex items-center mt-5'>
-                <label className='font-bold text-lg w-32'>Role</label>
-                <span className='mx-20'>:</span>
-                <input
-                  type='text'
-                  name='role'
-                  value={formData.role}
-                  onChange={handleChange}
-                  className='text-gray-500 bg-inherit border border-gray-400 p-2 rounded-md flex-grow'
-                />
-              </div> */}
             </section>
           </div>
         </section>
       </form>
-      {/* <button
-        onClick={() => {
-          toast.success('Added Successfully', {
-            description: 'New Employee Added',
-          });
-
-          console.log('clicked');
-        }}
-      >
-        ADd
-      </button> */}
     </div>
   );
 }

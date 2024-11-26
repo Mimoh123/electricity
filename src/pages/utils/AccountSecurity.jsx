@@ -63,7 +63,7 @@ const AccountSecurity = () => {
     if (response.data.success) {
       toast.success(response.data.message);
     }
-    console.log(response);
+
     if (newPassword && oldPassword && confirmPassword) {
       if (newPassword !== confirmPassword) {
         toast.error('Passwords donot match', {

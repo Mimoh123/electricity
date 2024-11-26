@@ -65,7 +65,6 @@ export function ConsumptionChart() {
     { name: 'Quarterly' },
   ];
   useEffect(() => {
-    console.log('this is the selected type', selected);
     if (selected === 'Yearly') {
       setChartData(yearly);
     }
@@ -79,7 +78,7 @@ export function ConsumptionChart() {
   useEffect(() => {
     const getData = async () => {
       const response = await axiosInstance.get('admin/consumption');
-      console.log('response from cc', response.data.data);
+
       const transformedData = Object.entries(
         response.data.data.yearlyConsumption
       )
@@ -88,8 +87,6 @@ export function ConsumptionChart() {
           number,
         }))
         .reverse();
-
-      console.log('Transformed data', transformedData);
 
       const transformedDataHalf = Object.entries(
         response.data.data.halfYearlyConsumption.readings
@@ -115,11 +112,7 @@ export function ConsumptionChart() {
     };
     getData();
   }, []);
-  useEffect(() => {
-    console.log('This is yearly', yearly);
-    console.log('this is quareter', quarter_yearly);
-    console.log('half', half_yearly);
-  }, [yearly, quarter_yearly, half_yearly]);
+
   return (
     yearly &&
     yearly.length > 0 && (

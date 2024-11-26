@@ -31,32 +31,10 @@ function AddMeterRate() {
       [name]: value,
     }));
   };
-  useEffect(() => {
-    console.log('Value changed', selectedMeterType);
-  }, [selectedMeterType]);
-  useEffect(() => {
-    console.log('Value changed for customer', selectedCustomerType);
-    console.log(
-      'value for selectedCustomerType',
-      formData.selectedCustomerType
-    );
-  }, [selectedCustomerType]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const meterData = {};
-    // console.log('formdata', formData);
-    console.log('meterRate to be posted', {
-      meterRates: [
-        {
-          meterType: String(selectedMeterType),
-          customerType: String(selectedCustomerType),
-          baseRate: parseFloat(formData.baseRate),
-          minimumCharge: parseFloat(formData.minimumCharge),
-          fine: parseFloat(formData.fine),
-          serviceCharge: parseFloat(formData.serviceCharge),
-        },
-      ],
-    });
+
     try {
       const response = await axiosInstance.post('/meter-Rate', {
         meterRates: [
@@ -77,13 +55,10 @@ function AddMeterRate() {
       setTimeout(() => {
         navigate(-1);
       }, 3000);
-
-      console.log(response);
     } catch (error) {
       toast.error('Failed to Add Meter Rate', {
         description: error.response.data.message,
       });
-      console.log('error', error);
     }
   };
   return (
