@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Spinner from '@/pages/utils/Spinner';
 import { RxCross1 } from 'react-icons/rx';
+import { IoIosPrint } from 'react-icons/io';
 import '../index.css';
 
 function Print() {
@@ -84,10 +85,11 @@ function Print() {
       </div>
       {isButtonShown && (
         <button
-          className='p-2  bg-blue-600 text-white rounded-lg px-10'
+          className='p-2 mt-10 flex items-center  bg-blue-600 text-white rounded-lg px-10'
           onClick={handlePrint}
         >
-          Print
+          <IoIosPrint />
+          <h1 className='ml-2'> Print</h1>
         </button>
       )}
     </div>

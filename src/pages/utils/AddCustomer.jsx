@@ -220,7 +220,10 @@ function AddCustomer() {
                   }}
                 >
                   <SelectTrigger className='w-96 bg-inherit border-gray-400 text-gray-500 mt-5 lg:mt-0 py-6 font-semibold'>
-                    <SelectValue placeholder='Select Meter Type' />
+                    <SelectValue
+                      placeholder='Select Meter Type'
+                      className='placeholder:text-gray-400 '
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>

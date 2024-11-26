@@ -25,6 +25,7 @@ const CustomerManagement = () => {
   const [filteredData, setFilteredData] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+
   const [meterData, setMeterData] = useState(null);
 
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ const CustomerManagement = () => {
         <DialogueComponent variant='qr' qr={qr} handleQrDiv={handleQrDiv} />
       )}
       <div className='flex items-center justify-between'>
-        <form className='w-3/4' onSubmit={handleSearch}>
+        <form className='w-3/4 ' onSubmit={handleSearch}>
           <div className='border flex items-center bg-white justify-between  px-4 py-1 rounded-lg'>
             <input
               className='w-full p-2 outline-none'
@@ -144,6 +145,7 @@ const CustomerManagement = () => {
             </button>
           </div>
         </form>
+
         <button
           className='flex bg-green-700 hover:opacity-80  items-center justify-center p-3 rounded-md'
           onClick={() => {

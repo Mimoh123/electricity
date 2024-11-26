@@ -3,6 +3,7 @@ import { Icons } from '../../components/data/Icons';
 import { axiosInstance } from '../auth/config';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { IoIosPrint } from 'react-icons/io';
 import Spinner from './Spinner';
 
 function ViewDetailsTransaction() {
@@ -33,6 +34,9 @@ function ViewDetailsTransaction() {
     'Payment Method': bill.paymentMethod,
     Status: bill.status,
   };
+  const handlePrint = (id) => {
+    nagivate(`/print-transaction/${id}`, { state: { id: id } });
+  };
   if (loading) {
     return (
       <div className='h-full w-full flex justify-center items-center'>
@@ -42,7 +46,7 @@ function ViewDetailsTransaction() {
   }
   return (
     <div className='flex flex-col'>
-      <div className='flex flex-col items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <div className='flex justify-start w-full items-center'>
           <Icons.FiChevronLeft
             size='24px'
@@ -55,6 +59,15 @@ function ViewDetailsTransaction() {
             View Transaction Details
           </h1>
         </div>
+        <button
+          className='border bg-blue-500 text-white px-2 rounded-lg w-20 flex items-center'
+          onClick={() => {
+            handlePrint(bill.customer.id);
+          }}
+        >
+          <IoIosPrint />
+          <h1 className='p-2'>Print</h1>
+        </button>
       </div>
 
       <div className='flex flex-col mt-10 p-4'>
