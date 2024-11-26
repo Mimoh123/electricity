@@ -55,9 +55,6 @@ const EditMeterRate = () => {
   useEffect(() => {
     getAllMeterRates();
   }, []);
-  useEffect(() => {
-    console.log('All', allmeterData);
-  }, [allmeterData]);
 
   useEffect(() => {
     const id = location.state.id;
@@ -71,10 +68,7 @@ const EditMeterRate = () => {
         setEditId(data[0]._id);
         setSelectedMeterName(data[0].meterType);
         setSelectedCustomerType(data[0].customerType);
-        // setUser(response.data.data);
-        // const data = response.data.data;
-        // setSelectedMeter(data.meterRate._id);
-        // setSelectedMeterName(data.meterRate);
+
         setEditableMeter({
           meterType: data[0].meterType,
           customerType: data[0].customerType,
@@ -93,15 +87,7 @@ const EditMeterRate = () => {
       fetchUserData();
     }
   }, [location.state]);
-  useEffect(() => {
-    console.log('id to put ', editId);
-  }, [editId]);
-  useEffect(() => {
-    console.log('This is the selectedmeter name', selectedMeterName);
-  }, [selectedMeterName]);
-  useEffect(() => {
-    console.log('This is the selected cutomerType ', selectedCustomerType);
-  }, [selectedCustomerType]);
+
   // useEffect(() => {
   //   console.log('selected meter name', selectedMeterName);
   // }, [selectedMeterName]);
@@ -176,10 +162,6 @@ const EditMeterRate = () => {
     );
   }
 
-  // if (!user) {
-  //   return <div>No user found</div>;
-  // }
-
   return (
     <div className='flex flex-col'>
       <form onSubmit={handleSave}>
@@ -209,7 +191,6 @@ const EditMeterRate = () => {
             return (
               <div key={key} className='flex border-b py-2  items-center'>
                 {key === 'meterType' ? (
-                  // Special case for 'meterType' with DropdownMenu
                   <div className='flex items-center font-bold w-full text-lg'>
                     <label className='font-bold text-lg w-32'>
                       {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -246,21 +227,6 @@ const EditMeterRate = () => {
                           >
                             3 phase
                           </DropdownMenuItem>
-                          {/* {allmeterData.map((meterdata) => ( 
-                            <DropdownMenuItem
-                              key={meterdata._id}
-                              onClick={() => {
-                                handleMeterSelected(meterdata._id);
-                                handleMeterSelectedName(
-                                  meterdata.meterRates[0]
-                                );
-                                console.log('Meterdata', meterdata);
-                              }}
-                            >
-                              {meterdata.meterRates[0].meterType}/
-                              {meterdata.meterRates[0].customerType}
-                            </DropdownMenuItem>
-                          ))} */}
                         </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -318,22 +284,6 @@ const EditMeterRate = () => {
                           >
                             non-local
                           </DropdownMenuItem>
-
-                          {/* {allmeterData.map((meterdata) => ( 
-                            <DropdownMenuItem
-                              key={meterdata._id}
-                              onClick={() => {
-                                handleMeterSelected(meterdata._id);
-                                handleMeterSelectedName(
-                                  meterdata.meterRates[0]
-                                );
-                                console.log('Meterdata', meterdata);
-                              }}
-                            >
-                              {meterdata.meterRates[0].meterType}/
-                              {meterdata.meterRates[0].customerType}
-                            </DropdownMenuItem>
-                          ))} */}
                         </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>

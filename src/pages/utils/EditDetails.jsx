@@ -12,11 +12,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
@@ -36,7 +32,7 @@ const EditDetails = () => {
     setSelectedMeter(value);
     setEditableUser((prev) => ({
       ...prev,
-      meterType: value, // Update editableUser's meterType
+      meterType: value,
     }));
   };
   const handleMeterSelectedName = (value) => {
@@ -73,15 +69,7 @@ const EditDetails = () => {
       fetchUserData();
     }
   }, [location.state]);
-  useEffect(() => {
-    console.log('selected meter name', selectedMeterName);
-  }, [selectedMeterName]);
-  useEffect(() => {
-    console.log('selected meter from meterSelected', selectedMeter);
-  }, [selectedMeter]);
-  useEffect(() => {
-    console.log('meter number is ', meterNumber);
-  }, [meterNumber]);
+
   useEffect(() => {
     const fetchMeterData = async () => {
       try {
@@ -97,7 +85,7 @@ const EditDetails = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    console.log('editable user', editableUser);
+
     try {
       await axiosInstance.put(`/customer/${id}`, {
         name: editableUser.name,
