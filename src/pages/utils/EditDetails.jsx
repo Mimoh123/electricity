@@ -44,7 +44,7 @@ const EditDetails = () => {
     const fetchUserData = async () => {
       try {
         const response = await axiosInstance.get(`/customer/${id}`);
-        console.log('Response', response);
+
         setUser(response.data.data);
         const data = response.data.data;
         setSelectedMeter(data.meterBox.meterRate);
@@ -74,7 +74,7 @@ const EditDetails = () => {
     const fetchMeterData = async () => {
       try {
         const response = await axiosInstance.get('/meter-Rate');
-        console.log('Response from server:', response);
+
         setAllMeterData(response.data.data.meterRates);
       } catch (error) {
         console.error('Error fetching meter data:', error);

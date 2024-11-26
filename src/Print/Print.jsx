@@ -15,19 +15,17 @@ function Print() {
   const id = location.state.id;
   const [loading, setLoading] = useState(true);
   const [bill, setBill] = useState([]);
-  console.log(id);
+
   useEffect(() => {
     const getTransactionDetails = async () => {
       const response = await axiosInstance.get(`billing/${id}`);
-      console.log(response);
+
       setBill(response.data.data.billing);
       setLoading(false);
     };
     getTransactionDetails();
   }, []);
-  useEffect(() => {
-    console.log('details map', bill);
-  });
+
   useEffect(() => {
     const restoreButtonVisibility = () => {
       setIsButtonShown(true); // Restore the button visibility after printing

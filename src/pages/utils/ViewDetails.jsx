@@ -17,7 +17,7 @@ const ViewDetails = () => {
     const fetchUserData = async () => {
       try {
         const response = await axiosInstance.get(`/customer/${id}`);
-        console.log(response);
+
         setUser(response.data.data);
       } catch (error) {
         console.error(error);
@@ -30,9 +30,6 @@ const ViewDetails = () => {
       fetchUserData();
     }
   }, [id]);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   if (loading) {
     return (

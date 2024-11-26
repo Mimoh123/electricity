@@ -6,7 +6,7 @@ function QrView() {
   const location = useLocation();
   const navigate = useNavigate();
   const { name } = location.state || '';
-  console.log(name);
+
   return (
     <div className='flex flex-col'>
       <section className='flex items-center '>

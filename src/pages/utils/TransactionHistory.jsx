@@ -25,7 +25,7 @@ function TransactionHistory() {
             page: page,
           },
         });
-        console.log('Response', response);
+
         setTableData(response.data.data);
         setMaxPage(response.data.data.totalPages);
       } catch (error) {
@@ -58,15 +58,11 @@ function TransactionHistory() {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [page, maxPage]);
-  useEffect(() => {
-    console.log('table data from transaction history', tableData);
-  }, [tableData]);
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  const handleSearch = () => {
-    console.log('searhc');
-  };
+  const handleSearch = () => {};
   return (
     <div className='flex flex-col gap-y-8'>
       <h1 className='text-black text-2xl font-medium flex flex-1'>

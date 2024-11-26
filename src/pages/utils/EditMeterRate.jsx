@@ -49,7 +49,7 @@ const EditMeterRate = () => {
   };
   const getAllMeterRates = async () => {
     const response = await axiosInstance.get('meter-Rate');
-    console.log('Response', response.data.data.meterRates);
+
     setAllMeterData(response.data.data.meterRates);
   };
   useEffect(() => {
@@ -62,8 +62,7 @@ const EditMeterRate = () => {
     const fetchUserData = async () => {
       try {
         const response = await axiosInstance.get(`meter-Rate/${id}`);
-        console.log('Response', response);
-        console.log('MEterRates', response.data.data.meterRates);
+
         const data = response.data.data.meterRates;
         setEditId(data[0]._id);
         setSelectedMeterName(data[0].meterType);
@@ -108,20 +107,7 @@ const EditMeterRate = () => {
   }, [selectedMeterName]);
   const handleSave = async (e) => {
     e.preventDefault();
-    console.log('editable user', editableMeter);
-    console.log('posting body', {
-      meterRates: [
-        {
-          meterType: selectedMeterName,
-          customerType: selectedCustomerType,
-          baseRate: editableMeter.Rate,
-          minimumCharge: editableMeter.minCharge,
-          fine: editableMeter.fine,
-          serviceCharge: editableMeter.serviceCharge,
-        },
-      ],
-    });
-    console.log('selected meter name', selectedMeterName);
+
     try {
       const response = await axiosInstance.put(`/meter-Rate/${editId}`, {
         meterRates: [

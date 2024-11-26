@@ -82,13 +82,7 @@ function AddMeterRate() {
             <div className='flex items-center mt-5'>
               <label className='font-bold text-lg w-32'>MeterType</label>
               <span className='mx-20'>:</span>
-              {/* <input
-                type='text'
-                name='meterType'
-                value={formData.meterType}
-                onChange={handleChange}
-                className='bg-inherit text-gray-500 border border-gray-400 p-2 rounded-md flex-grow'
-              /> */}
+
               <Select
                 onValueChange={(value) => {
                   setSelectedMeterType(value);

@@ -12,19 +12,17 @@ function ViewDetailsTransaction() {
   const id = location.state.id;
   const [loading, setLoading] = useState(true);
   const [bill, setBill] = useState([]);
-  console.log(id);
+
   useEffect(() => {
     const getTransactionDetails = async () => {
       const response = await axiosInstance.get(`billing/${id}`);
-      console.log(response);
+
       setBill(response.data.data.billing);
       setLoading(false);
     };
     getTransactionDetails();
   }, []);
-  useEffect(() => {
-    console.log('details map', bill);
-  });
+
   const detailsMap = {
     // CName: bill.customer.name || '',
     'Transaction ID': bill._id || '',

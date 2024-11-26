@@ -31,9 +31,6 @@ const ViewEmployeeDetails = () => {
       fetchEmployeeData();
     }
   }, [id]);
-  useEffect(() => {
-    console.log('User', user);
-  }, [user]);
 
   if (loading) {
     return (
