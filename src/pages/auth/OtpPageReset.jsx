@@ -127,7 +127,7 @@ const OtpPageReset = () => {
       </div>
       <div className='flex gap-8 flex-col bg-white p-8 rounded-lg shadow-3xl items-center justify-center'>
         <h1 className='font-semibold text-2xl'>Verify your Code to Reset</h1>
-        {console.log(formData)}
+
         <form
           className='flex flex-col w-96 gap-8 px-5 items-center'
           onSubmit={handleSubmit}

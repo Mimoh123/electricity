@@ -100,8 +100,6 @@ const CustomerManagement = () => {
       `customer/search?phoneNumber=${phoneNumberforSearch}`
     );
 
-    console.log('This is the response', response.data.data);
-
     if (phoneNumberforSearch) {
       setFilteredData(response.data.data[0]);
       if (!response.data.data[0]) {

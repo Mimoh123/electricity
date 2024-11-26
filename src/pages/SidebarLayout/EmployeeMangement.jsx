@@ -82,7 +82,7 @@ const EmployeeManagement = () => {
   };
   const handleSearch = async (e) => {
     e.preventDefault();
-    console.log('inside the submit', phoneNumberforSearch);
+
     if (phoneNumberforSearch) {
       try {
         const response = await axiosInstance.get(

@@ -102,9 +102,7 @@ const EditMeterRate = () => {
   //   };
   //   fetchMeterData();
   // }, []);
-  useEffect(() => {
-    console.log('selected meter name', selectedMeterName);
-  }, [selectedMeterName]);
+
   const handleSave = async (e) => {
     e.preventDefault();
 
