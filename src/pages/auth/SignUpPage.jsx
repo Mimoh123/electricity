@@ -11,7 +11,6 @@ const SignUpPage = () => {
     confirmPassword: '',
   });
   const baseURL = import.meta.env.VITE_APP_URL;
-  console.log('baseURL', baseURL);
 
   const handleForgotPassword = async () => {
     try {
@@ -28,7 +27,6 @@ const SignUpPage = () => {
       }
 
       const json = await response.json();
-      console.log('Registration success:', json);
     } catch (error) {
       console.error('Error during registration:', error.message);
     }
@@ -52,9 +50,9 @@ const SignUpPage = () => {
           },
           body: JSON.stringify(formData),
         });
-        console.log('response', response);
+
         const json = await response.json();
-        console.log('json ', json);
+
         if (json.success === false) {
           if (json.message.includes('phoneNumber_1 dup key'))
             toast.error('Failed to Add Customer', {
@@ -67,7 +65,6 @@ const SignUpPage = () => {
           throw new Error(`Response status: ${json}`);
         }
 
-        console.log('Registration success:', json);
         navigate('/otp', {
           state: { email: formData.email, isFromSignUp: true },
         });

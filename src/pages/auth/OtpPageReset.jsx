@@ -15,7 +15,6 @@ const OtpPageReset = () => {
   // const formData = location.state?.email || '';
   const formData = location.state?.email ? location.state.email : '';
 
-  console.log('Formdata email:', formData);
   // const [otp, setOtp] = useState('');
 
   // const handleChange = (e) => {
@@ -32,7 +31,7 @@ const OtpPageReset = () => {
       updatedOtp[index] = value;
       setOtp(updatedOtp);
       const otpValue = otp.join('');
-      console.log('written otp', otpValue);
+
       // Auto-focus next input if the current input is filled
       if (value && index < 3) {
         document.getElementById(`otp-input-${index + 1}`).focus();
@@ -46,15 +45,6 @@ const OtpPageReset = () => {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
-
-  // Handle OTP submission
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const otpValue = otp.join('');
-  //   console.log('OTP Submitted:', otpValue);
-
-  //   // Perform your API request or validation here
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +62,7 @@ const OtpPageReset = () => {
         }),
       });
       const json = await response.json();
-      console.log(json);
+
       if (json.message === 'User verified successfully') {
         // toast.success();
         navigate(`/reset-password/${json.data.userId}`, {
@@ -107,7 +97,6 @@ const OtpPageReset = () => {
       }
 
       const json = await response.json();
-      console.log('Registration success:', json);
 
       toast.success('Code sent to your email');
     } catch (error) {

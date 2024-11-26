@@ -35,7 +35,7 @@ function AddCustomer() {
   const fetchMeterDataById = async (id) => {
     try {
       const response = await axiosInstance.get(`/meter-Rate/${id}`);
-      console.log('Meter data by id', response.data.data);
+
       // setSelectedMeterDataFetched(response.data.data);
       return response.data.data;
     } catch (error) {

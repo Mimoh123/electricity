@@ -28,9 +28,7 @@ const AccountSecurity = () => {
   const handleModalChange = (e) => {
     setModalOpen(e.target.checked);
   };
-  useEffect(() => {
-    console.log(modalOpen);
-  }, [modalOpen]);
+
   const handleNewPassword = (e) => {
     setNewPassword(e.target.value);
   };
@@ -41,7 +39,7 @@ const AccountSecurity = () => {
   useEffect(() => {
     const GetUserDetails = async () => {
       const response = await axiosInstance.get('/auth');
-      console.log(response);
+
       setInitial(response.data.data.isTwoFaEnabled);
       setModalOpen(response.data.data.isTwoFaEnabled);
     };
@@ -67,7 +65,6 @@ const AccountSecurity = () => {
     }
     console.log(response);
     if (newPassword && oldPassword && confirmPassword) {
-      console.log('yes changes');
       if (newPassword !== confirmPassword) {
         toast.error('Passwords donot match', {
           description: 'New password and confirm password dont match',
@@ -79,7 +76,7 @@ const AccountSecurity = () => {
             newPassword,
             confirmPassword,
           });
-          console.log('Change pw', changePw);
+
           if (changePw) {
             toast.success('Password changed Successfully', {
               description: 'Password has been changed successfully',

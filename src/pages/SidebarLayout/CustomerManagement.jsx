@@ -44,9 +44,6 @@ const CustomerManagement = () => {
         .then((response) => {
           setTableData(response.data.data);
           setMaxPage(response.data.data.totalPages);
-
-          // console.log('Response', response);
-          // console.log('TableData', tableData);
         })
         .catch((error) =>
           console.error('Error occured while fetching customer: ', error)

@@ -27,8 +27,6 @@ const BillingRateSettings = () => {
       axiosInstance
         .get('/meter-rate')
         .then((response) => {
-          console.log('reponse: ', response);
-          console.log('Trying to send', response.data.data);
           setIsLoading(false);
           setMaxPage(response.data.data.totalPages);
 
@@ -40,12 +38,7 @@ const BillingRateSettings = () => {
     };
     FetchingMeterdata();
   }, []);
-  useEffect(() => {
-    console.log('Billing table data', tableData);
-  }, [tableData]);
-  useEffect(() => {
-    console.log('input is ', query);
-  }, [query]);
+
   const handleAddNewField = () => {
     setIsModalOpen(true);
   };
@@ -55,7 +48,7 @@ const BillingRateSettings = () => {
     const response = await axiosInstance.get(
       `/meter-Rate/rate/search?customerType=${query}`
     );
-    console.log('response from search', response.data.data);
+
     if (response.data.data.totalMeterRate > 1) {
       setTableData(response.data.data.meterRate);
     }
@@ -82,7 +75,6 @@ const BillingRateSettings = () => {
               placeholder='Enter Customer Type'
               onChange={(e) => {
                 setQuery(e.target.value);
-                console.log(query);
               }}
             />
             <button type='submit'>

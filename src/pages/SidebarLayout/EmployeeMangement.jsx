@@ -69,10 +69,7 @@ const EmployeeManagement = () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
   }, [page, maxPage]);
-  useEffect(() => {
-    console.log('Selected email to reset', selectedEmail);
-    // console.log('tabledata', tableData);
-  }, [selectedEmail]);
+
   const getSelectedEmail = (value) => {
     setSelectedEmail(value);
   };
@@ -91,12 +88,10 @@ const EmployeeManagement = () => {
         const response = await axiosInstance.get(
           `employee/search?phoneNumber=${phoneNumberforSearch}`
         );
-        // console.log(response.data.data.result.employees[0]);
-        console.log('Response is', response);
-        console.log(response.data.success);
+
         if (response.data.success) {
           const data = response.data.data.employees[0];
-          console.log(data);
+
           setFilteredData([data]);
 
           if (response.data.data.totalEmployee == 0) {

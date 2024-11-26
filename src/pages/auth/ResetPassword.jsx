@@ -12,9 +12,7 @@ const ResetPassword = () => {
   });
   const location = useLocation();
   const id = location.state.id;
-  console.log('id is ', id);
-  // const [divOpen, setDivOpen] = useState(false);
-  // const [pwSeen, setPwSeen] = useState(false);
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_APP_URL;
 
@@ -25,31 +23,6 @@ const ResetPassword = () => {
 
   const handleForgotPassword = () => {
     navigate('/forgot-password');
-    // try {
-    //   const forgotPasswordBody = {
-    //     email: formData.emailOrPhone,
-    //   };
-    //   console.log('forgotpasswordbody', forgotPasswordBody);
-    //   const response = await fetch(`${baseURL}/admin/forgotPassword`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(forgotPasswordBody),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error(`Response status: ${response.status}`);
-    //   }
-
-    //   const json = await response.json();
-    //   console.log(json);
-    //   if (json.success) {
-    //     setDivOpen(true);
-    //   }
-    // } catch (error) {
-    //   console.error('Error during registration:', error.message);
-    // }
   };
 
   const handleSubmit = async (e) => {
@@ -72,9 +45,9 @@ const ResetPassword = () => {
       if (!response.ok) {
         toast.success('Couldnot change password');
       }
-      console.log(response);
+
       const json = await response.json();
-      console.log(json);
+
       if (json.message === 'Password has been reset successfully') {
         toast.success('Password changed successfully');
         setTimeout(() => {

@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   const fetchCountData = async () => {
     try {
       const response = await axiosInstance.get('/count/total');
-      console.log('response dashboard', response);
+
       return response.data.data;
     } catch (error) {
       console.log(error);
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchCountData();
-      console.log(data);
+
       const updatedDashboardData = dashboardBoxData.map((item) => {
         switch (item.name) {
           case 'Active Consumer':
@@ -46,9 +46,7 @@ const AdminDashboard = () => {
 
     fetchData(); // Call the async function
   }, []);
-  useEffect(() => {
-    console.log('Dashboarddata', DashboardBoxData);
-  }, [DashboardBoxData]);
+
   return (
     <div className='flex flex-col justify-between gap-y-14'>
       <h1 className='text-black  text-2xl font-bold flex flex-1'>
