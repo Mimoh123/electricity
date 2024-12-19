@@ -18,6 +18,9 @@ function TransactionHistory() {
   const [maxPage, setMaxPage] = useState(100);
   const [search, setSearch] = useState('');
   useEffect(() => {
+    console.log('this is the trasaction history', tableData);
+  }, [tableData]);
+  useEffect(() => {
     setTableData(null);
     const fetchData = async () => {
       try {

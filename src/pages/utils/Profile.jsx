@@ -16,7 +16,6 @@ const Profile = () => {
   const [id, setId] = useState(null);
   const [viewImage, setViewImage] = useState(null);
   const access_token = localStorage.getItem('access_token');
-  const inputRef = useRef(null);
   const fetchAdminDetails = async () => {
     try {
       const response = await fetch(`${baseURL}/auth`, {
@@ -46,11 +45,6 @@ const Profile = () => {
     console.log('clicked');
     setImage(event.target.files[0]);
     setViewImage(URL.createObjectURL(event.target.files[0]));
-  };
-  const triggerInput = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
   };
 
   const handleName = (e) => {
@@ -132,7 +126,6 @@ const Profile = () => {
             className='h-16 w-16 rounded-full'
             onClick={() => {
               document.getElementById('fileInput').click();
-              // console.log('clicked');
             }}
           />
           <input

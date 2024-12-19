@@ -141,7 +141,7 @@ const TransactionTable = ({ TableData, headers }) => {
                 {data.billing.customer ? data.billing.customer.name : ''}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
-                {data.billing._id}
+                {data.billing.billNumber}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
                 {data.billing.billingDate}
