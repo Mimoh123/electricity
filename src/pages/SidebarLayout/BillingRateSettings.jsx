@@ -156,7 +156,7 @@ const BillingRateSettings = () => {
             onClick={() => {
               navigate('/billing-rate-settings/add-meter-rate');
             }}
-            className='flex bg-green-700 pb-2 text-white w-16 justify-center rounded-md text-4xl  font-thin '
+            className='flex bg-green-700 pb-2 hover:opacity-70 text-white w-16 justify-center rounded-md text-4xl  font-thin '
           >
             +
           </button>
