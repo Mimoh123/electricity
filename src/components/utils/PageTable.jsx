@@ -11,6 +11,7 @@ import { ImCross } from 'react-icons/im';
 import { exportToExcel } from '@/Excel/ExportToExcel';
 import { LiaQrcodeSolid } from 'react-icons/lia';
 const PageTable = ({
+  selectedSort,
   giveQr,
   TableData,
   headers,
@@ -20,16 +21,24 @@ const PageTable = ({
 }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  const [tableDataNeeded, setTableDataNeeded] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
   useEffect(() => {
-    // Check if TableData.customersWithInfo exists
+    if (selectedSort === 'Most recent First') {
+      const sortedData = [...TableData.customersWithInfo].reverse();
+      setTableDataNeeded(sortedData);
+      console.log('Most recent', sortedData);
+    } else {
+      const sortedData = TableData.customersWithInfo;
+      console.log('Normal', sortedData);
+      setTableDataNeeded(sortedData);
+    }
+  }, [selectedSort, TableData]);
+  useEffect(() => {
     if (TableData.customersWithInfo) {
-      // Transform the customer data to the format you want
       const formattedData = TableData.customersWithInfo.map((customer) => ({
         Name: customer.name,
         Address: customer.address,
@@ -38,8 +47,6 @@ const PageTable = ({
         LastPay: customer.lastPayDate,
         'Previous Pay': customer.previousAmount,
       }));
-
-      // Set the transformed data into the state
       setData(formattedData);
     }
   }, [TableData]);
@@ -75,7 +82,7 @@ const PageTable = ({
           </tr>
         </thead>
         <tbody>
-          {TableData.customersWithInfo.map((data, index) => (
+          {tableDataNeeded.map((data, index) => (
             <tr className='' key={index}>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
                 {data.name}

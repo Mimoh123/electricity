@@ -63,7 +63,7 @@ const EmployeeTable = ({ TableData, headers, getSelectedEmail, handleDiv }) => {
                 {data.totalReading}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
-                {data.cashCollected ? data.cashCollected : ''}
+                {data.cashCollected ? data.cashCollected : 0}
               </td>
               <td
                 className='border-b-2  border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'

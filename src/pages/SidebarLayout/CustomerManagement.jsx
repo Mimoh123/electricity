@@ -34,7 +34,8 @@ const CustomerManagement = () => {
   const [filteredData, setFilteredData] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [selectedSort, setSelectedSort] = useState('Most recent First');
+  const [selectedSort, setSelectedSort] = useState('Oldest First');
+  const [displayPage, setDisplayPage] = useState(1);
 
   const [meterData, setMeterData] = useState(null);
   const data = ['Most recent First', 'Oldest First'];
@@ -45,15 +46,22 @@ const CustomerManagement = () => {
 
   useEffect(() => {
     setTableData(null);
+    const apiPage =
+      selectedSort === 'Most recent First'
+        ? maxPage - (displayPage - 1)
+        : displayPage;
+    console.log(apiPage);
     const fetchData = async () => {
       axiosInstance
         .get('/customer/pagination', {
           params: {
-            page,
+            page: apiPage,
           },
         })
         .then((response) => {
-          setTableData(response.data.data);
+          const neededdata = response.data.data;
+          console.log(neededdata);
+          setTableData(neededdata);
           setMaxPage(response.data.data.totalPages);
         })
         .catch((error) =>
@@ -61,32 +69,35 @@ const CustomerManagement = () => {
         );
     };
     fetchData();
-  }, [page]);
+  }, [page, displayPage, selectedSort]);
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= maxPage) {
+      setDisplayPage(newPage);
+    } else {
+      toast.error(
+        newPage < 1 ? 'This is the first page' : 'This is the last page'
+      );
+    }
+  };
   useEffect(() => {
     const handleKeyPress = (e) => {
+      console.log('key pressed', e.key);
       const isInput = e.target.tagName === 'INPUT';
       if (isInput) {
         return;
       }
       if (e.key == 'ArrowLeft') {
-        if (page === 1) {
-          toast.error('This is the last page');
-        } else {
-          setPage(page - 1);
-        }
+        handlePageChange(displayPage - 1);
       } else if (e.key === 'ArrowRight') {
-        if (page === maxPage) {
-          toast.error('This is the last page');
-        } else {
-          setPage(page + 1);
-        }
+        handlePageChange(displayPage + 1);
       }
     };
     document.addEventListener('keydown', handleKeyPress);
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [page, maxPage]);
+  }, [displayPage]);
+
   const handleDiv = (state) => {
     setIsModalOpen(state);
   };
@@ -152,10 +163,10 @@ const CustomerManagement = () => {
           </div>
         </form>
         {!tableData && !filteredData ? (
-          <Skeleton className='ml-[-60px] h-12 w-16' />
+          <Skeleton className='ml-[-70px] h-12 w-16' />
         ) : (
           <div
-            className='flex py-1  ml-[-60px] justify-start
+            className='flex py-1  ml-[-70px] justify-start
         '
           >
             <DropdownMenu>
@@ -184,6 +195,7 @@ const CustomerManagement = () => {
                         className='w-auto'
                         onClick={(key) => {
                           setSelectedSort(item);
+                          setDisplayPage(1);
                         }}
                       >
                         {item}
@@ -217,6 +229,7 @@ const CustomerManagement = () => {
       {!tableData && !filteredData && <SkeletonTable headers={Headers} />}
       {tableData && !filteredData && (
         <PageTable
+          selectedSort={selectedSort}
           giveQr={giveQr}
           handleQrDiv={handleQrDiv}
           TableData={tableData}
@@ -239,9 +252,7 @@ const CustomerManagement = () => {
       <div className='w-full flex items-center justify-center'>
         <section className='w-full  flex  items-center justify-center'>
           <button
-            onClick={() => {
-              setPage(1);
-            }}
+            onClick={() => handlePageChange(1)}
             className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
           >
             <FaAngleDoubleLeft
@@ -251,34 +262,20 @@ const CustomerManagement = () => {
           </button>
 
           <button
-            onClick={() => {
-              if (page == 1) {
-                toast.error('This is the first page');
-              } else {
-                setPage(page - 1);
-              }
-            }}
+            onClick={() => handlePageChange(displayPage - 1)}
             className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
           >
             <FaChevronLeft className='text-gray-500 hover:cursor-pointer' />
           </button>
-          <h1 className='font-semibold mx-4 text-gray-500'>{page}</h1>
+          <h1 className='font-semibold mx-4 text-gray-500'>{displayPage}</h1>
           <button
-            onClick={() => {
-              if (page !== maxPage) {
-                setPage(page + 1);
-              } else {
-                toast.error('No more pages to load');
-              }
-            }}
+            onClick={() => handlePageChange(displayPage + 1)}
             className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
           >
             <FaChevronRight className='text-gray-500  hover:cursor-pointer' />
           </button>
           <button
-            onClick={() => {
-              setPage(maxPage);
-            }}
+            onClick={() => handlePageChange(maxPage)}
             className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
           >
             <FaAngleDoubleRight

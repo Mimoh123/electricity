@@ -13,6 +13,7 @@ import SkeletonTable from '@/components/utils/SkeletonTable';
 function TransactionHistory() {
   const [tableData, setTableData] = useState(null);
   const [page, setPage] = useState(1);
+  const [showNoData, setShowNoData] = useState(false);
   const [loading, setLoading] = useState(true);
   const [maxPage, setMaxPage] = useState(100);
   const [search, setSearch] = useState('');
@@ -34,6 +35,15 @@ function TransactionHistory() {
     };
     fetchData();
   }, [page]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!tableData) {
+        setShowNoData(true);
+      }
+    }, 10000);
+
+    return () => clearTimeout(timeout);
+  }, [tableData, page]);
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === 'INPUT') {
@@ -63,6 +73,26 @@ function TransactionHistory() {
     setSearch(e.target.value);
   };
   const handleSearch = () => {};
+  if (showNoData) {
+    return (
+      <div className='flex flex-col gap-y-8'>
+        <h1 className='text-black text-2xl font-medium flex flex-1'>
+          Transaction History
+        </h1>
+        <div className='flex justify-between'>
+          <div className='border flex items-center bg-white justify-between w-3/4 px-4 rounded-lg'>
+            <input
+              className='w-full p-2 outline-none'
+              placeholder='Search'
+              onChange={handleChange}
+            />
+            <Icons.GoSearch onClick={handleSearch} size='20px' />
+          </div>
+        </div>
+        <div className='text-gray-500 mt-8'>No data available</div>
+      </div>
+    );
+  }
   return (
     <div className='flex flex-col gap-y-8'>
       <h1 className='text-black text-2xl font-medium flex flex-1'>
@@ -135,13 +165,6 @@ function TransactionHistory() {
           </button>
         </section>
       </div>
-      {/* // )} */}
-      {/* {tableData && !filteredData && (
-        // <PageTable TableData={tableData} headers={Headers} />
-      )}
-      {filteredData && (
-        <FilteredCustomer headers={Headers} data={filteredData} />
-      )} */}
     </div>
   );
 }

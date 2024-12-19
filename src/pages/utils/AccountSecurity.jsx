@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import TwoFactorModal from '../../components/utils/TwoFactorModal';
-import { FaToggleOn } from 'react-icons/fa6';
-import { FaToggleOff } from 'react-icons/fa6';
+
 import { Switch } from '@mui/material';
 import { axiosInstance } from '../auth/config';
 import { toast } from 'sonner';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import axios from 'axios';
 import Spinner from './Spinner';
 
 const AccountSecurity = () => {
@@ -114,11 +111,7 @@ const AccountSecurity = () => {
       >
         <div className='flex justify-between items-center'>
           <h2 className='font-medium'>Two Factor Authentication</h2>
-          {/* {modalOpen ? (
-            <FaToggleOn className='text-4xl  text-blue-700' />
-          ) : (
-            <FaToggleOff className='text-4xl  text-blue-700' />
-          )} */}
+
           <Switch onChange={handleModalChange} checked={modalOpen} />
         </div>
         <p className='text-gray-500'>
@@ -198,7 +191,6 @@ const AccountSecurity = () => {
           </button>
         </div>
       </form>
-      {/* {modalOpen && <TwoFactorModal onClose={() => setModalOpen(false)} />} */}
     </div>
   );
 };

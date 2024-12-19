@@ -48,6 +48,7 @@ const BillingRateSettings = () => {
     const response = await axiosInstance.get(
       `/meter-Rate/rate/search?customerType=${query}`
     );
+    console.log('this is the response', response);
 
     if (response.data.data.totalMeterRate > 1) {
       setTableData(response.data.data.meterRate);
@@ -57,7 +58,7 @@ const BillingRateSettings = () => {
         description: 'The meter type you searched is not available',
       });
     }
-    if (response.data.totalMeterRate == 1) {
+    if (response.data.data.totalMeterRate == 1) {
       setTableData(response.data.data.meterRate);
     }
   };
