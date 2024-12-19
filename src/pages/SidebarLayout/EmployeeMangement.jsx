@@ -181,7 +181,7 @@ const EmployeeManagement = () => {
             onClick={() => {
               setPage(1);
             }}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 p-2 hover:opacity-65 rounded-xl'
           >
             <FaAngleDoubleLeft
               size={'17px'}
@@ -197,7 +197,7 @@ const EmployeeManagement = () => {
                 setPage(page - 1);
               }
             }}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaChevronLeft className='text-gray-500 hover:cursor-pointer' />
           </button>
@@ -210,7 +210,7 @@ const EmployeeManagement = () => {
                 toast.error('No more pages to load');
               }
             }}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaChevronRight className='text-gray-500  hover:cursor-pointer' />
           </button>
@@ -218,7 +218,7 @@ const EmployeeManagement = () => {
             onClick={() => {
               setPage(maxPage);
             }}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaAngleDoubleRight
               size={'17px'}

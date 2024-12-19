@@ -96,7 +96,7 @@ const BillingRateSettings = () => {
       </div>
       {!tableData && <SkeletonTable headers={headers} />}
       {tableData ? <BillingTable billingData={tableData} /> : ''}
-      {tableData && (
+      {/* {tableData && (
         <div className='w-full flex items-center justify-center'>
           <section className='w-full  flex  items-center justify-center'>
             <button
@@ -149,7 +149,7 @@ const BillingRateSettings = () => {
             </button>
           </section>
         </div>
-      )}
+      )} */}
       {!isLoading && (
         <section className=' flex justify-around w-1/6 '>
           <button

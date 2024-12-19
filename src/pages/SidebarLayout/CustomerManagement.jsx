@@ -253,7 +253,7 @@ const CustomerManagement = () => {
         <section className='w-full  flex  items-center justify-center'>
           <button
             onClick={() => handlePageChange(1)}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 p-2 hover:opacity-65 rounded-xl'
           >
             <FaAngleDoubleLeft
               size={'17px'}
@@ -263,20 +263,20 @@ const CustomerManagement = () => {
 
           <button
             onClick={() => handlePageChange(displayPage - 1)}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 hover:opacity-65 p-2 rounded-xl'
           >
-            <FaChevronLeft className='text-gray-500 hover:cursor-pointer' />
+            <FaChevronLeft className='text-gray-500  hover:cursor-pointer' />
           </button>
           <h1 className='font-semibold mx-4 text-gray-500'>{displayPage}</h1>
           <button
             onClick={() => handlePageChange(displayPage + 1)}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 hover:opacity-65 rounded-xl'
           >
             <FaChevronRight className='text-gray-500  hover:cursor-pointer' />
           </button>
           <button
             onClick={() => handlePageChange(maxPage)}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 hover:opacity-65 rounded-xl'
           >
             <FaAngleDoubleRight
               size={'17px'}

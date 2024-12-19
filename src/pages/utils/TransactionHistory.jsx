@@ -119,7 +119,7 @@ function TransactionHistory() {
             onClick={() => {
               setPage(1);
             }}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaAngleDoubleLeft
               size={'17px'}
@@ -135,7 +135,7 @@ function TransactionHistory() {
                 setPage(page - 1);
               }
             }}
-            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg mr-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaChevronLeft className='text-gray-500 hover:cursor-pointer' />
           </button>
@@ -148,7 +148,7 @@ function TransactionHistory() {
                 toast.error('No more pages to load');
               }
             }}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaChevronRight className='text-gray-500  hover:cursor-pointer' />
           </button>
@@ -156,7 +156,7 @@ function TransactionHistory() {
             onClick={() => {
               setPage(maxPage);
             }}
-            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl'
+            className='border border-gray-400 shadow-lg ml-2 p-2 rounded-xl hover:opacity-65'
           >
             <FaAngleDoubleRight
               size={'17px'}
