@@ -118,8 +118,9 @@ const AccountSecurity = () => {
           Two-factor authentication adds an extra layer of security to your
           account by requiring both a password and a second code.
         </p>
-
-        <button className='font-medium'>Change Password</button>
+        <div className='p-2 flex justify-center items-center'>
+          <span className='font-medium mt-10'>Change Password</span>
+        </div>
 
         <div className='space-y-4'>
           <div className='flex flex-col'>
