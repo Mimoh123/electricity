@@ -139,7 +139,7 @@ function AddMeterRate() {
               />
             </div>
             <div className='flex items-center mt-5'>
-              <label className='font-bold text-lg w-32'>Min Charnge</label>
+              <label className='font-bold text-lg w-32'>Min Charge</label>
               <span className='mx-20'>:</span>
               <input
                 required

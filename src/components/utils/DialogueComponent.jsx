@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { axiosInstance } from '@/pages/auth/config';
 import { toast } from 'sonner';
 import QRCode from 'react-qr-code';
+import { IoIosPrint } from 'react-icons/io';
 
 function DialogueComponent({
   qr,
@@ -15,6 +16,7 @@ function DialogueComponent({
   selectedItemEmail,
   handleSuccessDiv,
 }) {
+  const qrRef = useRef(null);
   const handleDelete = async () => {
     try {
       const response = await axiosInstance.delete(`/customer/${deleteId}`);
@@ -50,6 +52,50 @@ function DialogueComponent({
       });
     }
   };
+  const handlePrint = () => {
+    if (qrRef.current) {
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print QR Code</title>
+            <style>
+              @media print {
+                body {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                  margin: 0;
+                }
+                img {
+                  max-width: 100%;
+                }
+              }
+              body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+              }
+            </style>
+          </head>
+          <body>
+            ${qrRef.current.outerHTML}
+            <script>
+              window.onload = function() {
+                window.print();
+                window.close();
+              }
+            </script>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+  };
+
   if (variant === 'delete') {
     return (
       <Dialog
@@ -161,20 +207,41 @@ function DialogueComponent({
           handleQrDiv(false);
         }}
       >
-        <DialogContent className='p-0'>
+        <DialogContent className='pt-8  pb-16'>
           <DialogTitle />
           <div className='flex items-center justify-center h-96 w-92'>
             {qr ? (
-              <QRCode
-                value={JSON.stringify({ meterNumber: qr })}
-                height={80}
-                width={80}
-              />
+              <div className='flex flex-col items-center justify-center space-y-5'>
+                <section className='flex flex-col items-center'>
+                  <h1 className='text-xl font-semibold'>Scan QR Code</h1>
+                  <h1 className='text-gray-500 mt-2 text-base font-medium'>
+                    Scan this qr to get the customer details
+                  </h1>
+                </section>
+
+                <div
+                  className='border-2 border-#CCCC rounded-lg p-3'
+                  ref={qrRef}
+                >
+                  <QRCode
+                    value={JSON.stringify({ meterNumber: qr })}
+                    // height={80}
+                    // width={80}
+                    size={245}
+                    className='rounded-lg'
+                  />
+                </div>
+                <button
+                  className='p-2  flex items-center w-full justify-center bg-blue-800 text-white rounded-lg px-5'
+                  onClick={handlePrint}
+                >
+                  <IoIosPrint />
+                  <h1 className='ml-2'> Print</h1>
+                </button>
+              </div>
             ) : (
               <p>No QR code data available</p>
             )}
-
-            {/* <img src='' /> */}
           </div>
         </DialogContent>
       </Dialog>

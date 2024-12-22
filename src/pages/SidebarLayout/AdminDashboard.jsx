@@ -61,9 +61,9 @@ const AdminDashboard = () => {
           >
             <div className='w-full flex p-2  items-center'>
               <span className='p-2'>{items.icon}</span>
-              <span className='font-medium'>{items.name}</span>
+              <span className=''>{items.name}</span>
             </div>
-            <h1 className='text-center w-full text-[#666666]'>
+            <h1 className='text-center w-full text-xl font-bold text-[#666666]'>
               {items.number}
             </h1>
           </div>
