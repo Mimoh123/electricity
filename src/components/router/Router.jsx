@@ -25,6 +25,8 @@ import OtpPageReset from '@/pages/auth/OtpPageReset';
 import ResetPassword from '@/pages/auth/ResetPassword';
 import { Toaster } from 'sonner';
 import Print from '@/Print/Print';
+import CustomerBills from '@/pages/utils/CustomerBills';
+import EditBill from '@/pages/utils/EditBill';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -149,6 +151,22 @@ const Router = () => {
           element: (
             <AuthLayout>
               <EditMeterRate />
+            </AuthLayout>
+          ),
+        },
+        {
+          path: '/customer-management/bills/:id',
+          element: (
+            <AuthLayout>
+              <CustomerBills />
+            </AuthLayout>
+          ),
+        },
+        {
+          path: '/transaction-history/edit-bill/:id',
+          element: (
+            <AuthLayout>
+              <EditBill />
             </AuthLayout>
           ),
         },

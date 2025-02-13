@@ -40,11 +40,16 @@ const TransactionTable = ({ TableData, headers }) => {
   const handlePrintDetails = (id) => {
     navigate(`/print-transaction/${id}`, { state: { id: id } });
   };
+  const handleEditDetails = (id) => {
+    navigate(`/transaction-history/edit-bill/${id}`, {
+      state: { id: id },
+    });
+  };
   useEffect(() => {
     // Check if TableData.customersWithInfo exists
     if (TableData) {
       // Transform the customer data to the format you want
-      const formattedData = TableData.map((bill) => ({
+      const formattedData = TableData?.map((bill) => ({
         Name: bill.billing.customer ? bill.billing.customer.name : '',
         TID: bill.billing._id,
         BillingDate: bill.billing.billingDate,
@@ -182,6 +187,14 @@ const TransactionTable = ({ TableData, headers }) => {
                         // }}
                       >
                         Print Details
+                      </button>
+                      <button
+                        className='px-4 w-full py-2 hover:bg-gray-200 cursor-pointer'
+                        onClick={() => {
+                          handleEditDetails(data.billing.customer.id);
+                        }}
+                      >
+                        Edit Details
                       </button>
                       {/* 
                       <button

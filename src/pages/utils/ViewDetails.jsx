@@ -56,6 +56,11 @@ const ViewDetails = () => {
   const handleEditDetails = (id) => {
     nagivate(`/customer-management/edit-details/${id}`, { state: { id: id } });
   };
+  const handleCustomerBill = (id, name) => {
+    nagivate(`/customer-management/bills/${id}`, {
+      state: { id: id, name: name },
+    });
+  };
 
   return (
     <div className='flex flex-col'>
@@ -73,7 +78,7 @@ const ViewDetails = () => {
           <h1 className='text-2xl font-semibold p-2'>View Details</h1>
         </div>
         <button
-          className='border bg-blue-500 text-white px-2 rounded-lg w-20 flex items-center'
+          className='border bg-blue-500 text-white px-2 rounded-lg w-20 hover:opacity-50 flex items-center'
           onClick={() => {
             handleEditDetails(id);
           }}
@@ -98,6 +103,14 @@ const ViewDetails = () => {
             </div>
           ))}
         </div>
+        <button
+          className='border bg-blue-500 text-white ml-7 hover:opacity-50 px-2 rounded-lg w-32 justify-center h-auto py-2 mt-10 flex items-center'
+          onClick={() => {
+            handleCustomerBill(id, detailsMap.Name);
+          }}
+        >
+          View Bills
+        </button>
       </div>
     </div>
   );
