@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Headers } from '@/components/data/TransactionData';
 import { axiosInstance } from '../auth/config';
 import { Icons } from '@/components/data/Icons';
+
+import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
+import '@sbmdkl/nepali-datepicker-reactjs/dist/index.css';
 import TransactionTable from '@/components/utils/TransactionTable';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -23,6 +26,12 @@ function CustomerBills() {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
+  const handleDate = ({ bsDate, adDate }) => {
+    setStartDate({ date: bsDate });
+  };
+  const handleEndDate = ({ bsDate, adDate }) => {
+    setStartDate({ date: bsDate });
+  };
   // const fetchBills = async () => {
   //   try {
   //     const response = axiosInstance.get(
@@ -34,6 +43,10 @@ function CustomerBills() {
   // useEffect(() => {
   //   fetchBills();
   // }, [startDate, endDate]);
+  useEffect(() => {
+    console.log('Dates', startDate);
+    console.log('dates', endDate);
+  }, [startDate, endDate]);
   return (
     <div className='flex flex-col gap-y-8'>
       <div className='flex items-center space-x-3'>
@@ -59,10 +72,32 @@ function CustomerBills() {
           <Icons.GoSearch onClick={handleSearch} size='20px' />
         </div>
       </div>
+      <div className='flex space-x-10'>
+        <section className='flex space-y-3 flex-col'>
+          <span className='text-lg font-medium'>Start Date :</span>
+          <Calendar
+            onChange={handleDate}
+            className=' bg-[#e6e6fa] border-2 border-white shadow-sm rounded-lg p-2 hover:cursor-pointer'
+            language='en'
+            theme='default'
+          />
+        </section>
+
+        <section className='flex space-y-3 flex-col'>
+          <span className='text-lg font-medium'>End Date :</span>
+          <Calendar
+            onChange={handleEndDate}
+            className=' bg-[#e6e6fa] border-2 border-white shadow-sm rounded-lg p-2 hover:cursor-pointer'
+            language='en'
+            theme='default'
+          />
+        </section>
+      </div>
       <section>
         <h1>{`Name : ${name}`}</h1>
       </section>
       {!tableData && <SkeletonTable headers={Headers} />}
+
       {/* {tableData && (
         <TransactionTable headers={Headers} TableData={tableData.billings} />
       )} */}

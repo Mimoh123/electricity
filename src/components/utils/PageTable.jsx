@@ -25,6 +25,7 @@ const PageTable = ({
   const [tableData, setTableData] = useState([]);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   useEffect(() => {
     if (selectedSort === 'Most recent First') {
@@ -82,6 +83,7 @@ const PageTable = ({
           </tr>
         </thead>
         <tbody>
+          {console.log('this is the table data needed', tableDataNeeded)}
           {tableDataNeeded.map((data, index) => (
             <tr className='' key={index}>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
@@ -109,13 +111,13 @@ const PageTable = ({
                 {data.scNumber}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
-                {data.lastPayDate}
+                {data.billingDate?.lastPayDate || 'N/A'}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
-                {data.previousAmount ? 'Yes' : 'No'}
+                {data.billingDate?.previousAmount ? 'Yes' : 'No'}
               </td>
               <td className='border-b-2 border-gray-100 text-gray-500 p-4 relative text-center font-semibold text-sm'>
-                {data.unpaidAmount}
+                {data.billingDate?.unpaidAmount || 0}
               </td>
               <td
                 className='border-b-2 border-gray-100 p-4 relative text-gray-500 text-center text-sm hover:cursor-pointer'

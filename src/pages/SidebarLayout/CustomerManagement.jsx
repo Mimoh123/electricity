@@ -149,6 +149,7 @@ const CustomerManagement = () => {
       {qrDiv && (
         <DialogueComponent variant='qr' qr={qr} handleQrDiv={handleQrDiv} />
       )}
+      {console.log(tableData)}
       <div className='flex items-center  justify-between'>
         <form className='w-3/4 ' onSubmit={handleSearch}>
           <div className='border flex items-center bg-white justify-between  px-4 py-1 rounded-lg'>
